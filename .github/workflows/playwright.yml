@@ -1,13 +1,7 @@
 name: Playwright Tests
 
+# Disabled: Frontend has been removed
 on:
-  push:
-    branches:
-    - master
-  pull_request:
-    types:
-    - opened
-    - synchronize
   workflow_dispatch:
     inputs:
       debug_enabled:
@@ -17,6 +11,8 @@ on:
 
 jobs:
   changes:
+    # Disabled: Frontend has been removed
+    if: false
     runs-on: ubuntu-latest
     # Set job outputs to values from filter step
     outputs:
@@ -30,7 +26,6 @@ jobs:
         filters: |
           changed:
             - backend/**
-            - frontend/**
             - .env
             - docker-compose*.yml
             - .github/workflows/playwright.yml

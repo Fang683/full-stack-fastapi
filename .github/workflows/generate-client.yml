@@ -1,13 +1,13 @@
 name: Generate Client
 
+# Disabled: Frontend has been removed
 on:
-  pull_request:
-    types:
-    - opened
-    - synchronize
+  workflow_dispatch:
 
 jobs:
   generate-client:
+    # Disabled: Frontend has been removed
+    if: false
     permissions:
       contents: write
     runs-on: ubuntu-latest
