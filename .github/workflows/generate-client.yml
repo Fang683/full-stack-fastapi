@@ -4,6 +4,7 @@ name: Generate Client
 on:
   workflow_dispatch:
 
+
 jobs:
   generate-client:
     # Disabled: Frontend has been removed
