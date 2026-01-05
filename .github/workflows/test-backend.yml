@@ -33,6 +33,9 @@ jobs:
         run: |
           mkdir -p generated
           cp smithy/build/smithy/source/openapi/ItemsService.openapi.json generated/smithy-openapi.json
+      - name: Run contract test explicitly
+        run: uv run pytest -q tests/test_contract_paths.py
+        working-directory: backend
       - name: Run tests
         run: uv run bash scripts/tests-start.sh "Coverage for ${{ github.sha }}"
         working-directory: backend

@@ -44,3 +44,17 @@ jobs:
         run: |
           test -f build/smithy/source/openapi/ItemsService.openapi.json
         working-directory: smithy
+
+      - name: Copy generated OpenAPI to repo path
+        shell: bash
+        run: |
+          mkdir -p ../generated
+          cp build/smithy/source/openapi/ItemsService.openapi.json ../generated/smithy-openapi.generated.json
+        working-directory: smithy
+
+      - name: Diff against committed baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f generated/smithy-openapi.json
+          diff -u generated/smithy-openapi.json generated/smithy-openapi.generated.json
