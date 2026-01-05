@@ -18,15 +18,29 @@ jobs:
           java-version: "17"
 
       - name: Install Smithy CLI
+        shell: bash
         run: |
-          curl -L https://github.com/smithy-lang/smithy/releases/latest/download/smithy-cli-linux-amd64 -o smithy-cli
-          chmod +x smithy-cli
-          sudo mv smithy-cli /usr/local/bin/smithy
+          set -euo pipefail
+
+          mkdir -p smithy-install/smithy
+
+          curl -fL \
+            https://github.com/smithy-lang/smithy/releases/latest/download/smithy-cli-linux-x86_64.zip \
+            -o smithy-cli-linux-x86_64.zip
+
+          unzip -qo smithy-cli-linux-x86_64.zip -d smithy-install
+          mv smithy-install/smithy-cli-linux-x86_64/* smithy-install/smithy
+
+          sudo smithy-install/smithy/install
+
           smithy --version
 
       - name: Smithy build
         run: smithy build
         working-directory: smithy
-      
+
       - name: Verify Smithy OpenAPI exists
-        run: test -f smithy/build/smithy/source/openapi/ItemsService.openapi.json
+        shell: bash
+        run: |
+          test -f build/smithy/source/openapi/ItemsService.openapi.json
+        working-directory: smithy
