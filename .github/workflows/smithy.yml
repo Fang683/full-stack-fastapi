@@ -19,11 +19,14 @@ jobs:
 
       - name: Install Smithy CLI
         run: |
-          curl -L https://github.com/smithy-lang/smithy/releases/latest/download/smithy-cli-linux-amd64 -o smithy
-          chmod +x smithy
-          sudo mv smithy /usr/local/bin/smithy
+          curl -L https://github.com/smithy-lang/smithy/releases/latest/download/smithy-cli-linux-amd64 -o smithy-cli
+          chmod +x smithy-cli
+          sudo mv smithy-cli /usr/local/bin/smithy
+          smithy --version
 
       - name: Smithy build
-        run: |
-          cd smithy
-          smithy build
+        run: smithy build
+        working-directory: smithy
+      
+      - name: Verify Smithy OpenAPI exists
+        run: test -f smithy/build/smithy/source/openapi/ItemsService.openapi.json
