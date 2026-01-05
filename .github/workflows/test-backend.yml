@@ -29,6 +29,10 @@ jobs:
       - name: Migrate DB
         run: uv run bash scripts/prestart.sh
         working-directory: backend
+      - name: Copy Smithy OpenAPI to stable path
+        run: |
+          mkdir -p generated
+          cp smithy/build/smithy/source/openapi/ItemsService.openapi.json generated/smithy-openapi.json
       - name: Run tests
         run: uv run bash scripts/tests-start.sh "Coverage for ${{ github.sha }}"
         working-directory: backend

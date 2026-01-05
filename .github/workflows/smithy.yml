@@ -1,0 +1,29 @@
+name: Smithy Contract
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+jobs:
+  smithy-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Install Smithy CLI
+        run: |
+          curl -L https://github.com/smithy-lang/smithy/releases/latest/download/smithy-cli-linux-amd64 -o smithy
+          chmod +x smithy
+          sudo mv smithy /usr/local/bin/smithy
+
+      - name: Smithy build
+        run: |
+          cd smithy
+          smithy build

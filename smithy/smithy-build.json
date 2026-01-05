@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "sources": ["model.smithy"],
+  "outputDirectory": "build/smithy",
+  "maven": {
+    "dependencies": [
+      "software.amazon.smithy:smithy-openapi:1.64.0",
+      "software.amazon.smithy:smithy-aws-traits:1.64.0"
+    ]
+  },
+  "plugins": {
+    "openapi": {
+      "service": "example.items#ItemsService",
+      "title": "Items Service",
+      "version": "3.0.2"
+    }
+  }
+}
