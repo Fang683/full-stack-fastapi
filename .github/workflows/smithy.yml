@@ -45,6 +45,7 @@ jobs:
           test -f build/smithy/source/openapi/ItemsService.openapi.json
         working-directory: smithy
 
+
       - name: Copy generated OpenAPI to repo path
         shell: bash
         run: |
