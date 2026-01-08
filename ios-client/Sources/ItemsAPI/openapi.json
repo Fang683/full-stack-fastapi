@@ -1,0 +1,485 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Items Service",
+        "version": "2026-01-04"
+    },
+    "paths": {
+        "/api/v1/items": {
+            "get": {
+                "operationId": "ListItems",
+                "parameters": [
+                    {
+                        "name": "skip",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "default": 0
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "schema": {
+                            "type": "number",
+                            "default": 100
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ListItems 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListItemsResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnauthorizedError 401 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "ForbiddenError 403 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForbiddenErrorResponseContent"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "operationId": "CreateItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateItemRequestContent"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "CreateItem 201 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateItemResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationError 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnauthorizedError 401 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorResponseContent"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/items/{id}": {
+            "delete": {
+                "operationId": "DeleteItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "DeleteItem 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/DeleteItemResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnauthorizedError 401 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "ForbiddenError 403 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForbiddenErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFoundError 404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponseContent"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "operationId": "GetItem",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "GetItem 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetItemResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnauthorizedError 401 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "ForbiddenError 403 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForbiddenErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFoundError 404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponseContent"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "operationId": "UpdateItem",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateItemRequestContent"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "UpdateItem 200 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateItemResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "ValidationError 400 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "UnauthorizedError 401 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnauthorizedErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "ForbiddenError 403 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForbiddenErrorResponseContent"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "NotFoundError 404 response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/NotFoundErrorResponseContent"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CreateItemRequestContent": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "title"
+                ]
+            },
+            "CreateItemResponseContent": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "owner_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "owner_id",
+                    "title"
+                ]
+            },
+            "DeleteItemResponseContent": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "message"
+                ]
+            },
+            "ForbiddenErrorResponseContent": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "detail"
+                ]
+            },
+            "GetItemResponseContent": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "owner_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "owner_id",
+                    "title"
+                ]
+            },
+            "Item": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "owner_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "owner_id",
+                    "title"
+                ]
+            },
+            "ListItemsResponseContent": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Item"
+                        }
+                    },
+                    "count": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "count",
+                    "data"
+                ]
+            },
+            "NotFoundErrorResponseContent": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "detail"
+                ]
+            },
+            "UnauthorizedErrorResponseContent": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "detail"
+                ]
+            },
+            "UpdateItemRequestContent": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                }
+            },
+            "UpdateItemResponseContent": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "owner_id": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "owner_id",
+                    "title"
+                ]
+            },
+            "ValidationErrorResponseContent": {
+                "type": "object",
+                "properties": {
+                    "detail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "detail"
+                ]
+            }
+        }
+    }
+}
